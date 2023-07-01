@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Russian to English Vocabulary</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .card {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px;
+    }
+
+    .inner-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .card.flipped .inner-card {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    .show-image-btn {
+      margin-top: 10px;
+    }
+
+    .image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .card.flipped .image {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <!-- Cards will be dynamically generated here -->
+  </div>
+
+  <script>
+    const words = {
+      "Кот": {
+        translation: "Cat",
+        imageUrl: "URL_TO_CAT_IMAGE"
+      },
+      "Собака": {
+        translation: "Dog",
+        imageUrl: "URL_TO_DOG_IMAGE"
+      },
+      "Дом": {
+        translation: "House",
+        imageUrl: "URL_TO_HOUSE_IMAGE"
+      },
+      "Машина": {
+        translation: "Car",
+        imageUrl: "URL_TO_CAR_IMAGE"
+      },
+      "Яблоко": {
+        translation: "Apple",
+        imageUrl: "URL_TO_APPLE_IMAGE"
+      },
+      "Книга": {
+        translation: "Book",
+        imageUrl: "URL_TO_BOOK_IMAGE"
+      },
+      "Цветок": {
+        translation: "Flower",
+        imageUrl: "URL_TO_FLOWER_IMAGE"
+      },
+      "Стул": {
+        translation: "Chair",
+        imageUrl: "URL_TO_CHAIR_IMAGE"
+      },
+      "Окно": {
+        translation: "Window",
+        imageUrl: "URL_TO_WINDOW_IMAGE"
+      },
+      "Ручка": {
+        translation: "Pen",
+        imageUrl: "URL_TO_PEN_IMAGE"
+      }
+    };
+
+    function createCard(word, translation, imageUrl) {
+      const cardContainer = document.querySelector(".card-container");
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <div class="inner-card" onclick="toggleCard(this)">
+          <div class="front">${word}</div>
+          <div class="back">
+            <p>${translation}</p>
+            <button class="show-image-btn" onclick="toggleImage(this)">Show Image</button>
+            <img class="image" src="${imageUrl}" alt="${word}">
+          </div>
+        </div>
+      `;
+      cardContainer.appendChild(card);
+    }
+
+    function toggleCard(card) {
+      card.classList.toggle("flipped");
+    }
+
+    function toggleImage(button) {
+      const card = button.closest(".card");
+      card.classList.toggle("flipped");
+    }
+
+    // Create cards dynamically
+    for (const [word, data] of Object.entries(words)) {
+      createCard(word, data.translation, data.imageUrl);
+    }
+  </script>
+</body>
+</html>
