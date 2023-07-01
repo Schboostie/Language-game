@@ -1,0 +1,81 @@
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      max-width: 800px;
+    }
+
+    .card {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px;
+      border: 1px solid #aaa;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .inner-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .card.flipped .inner-card {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      transition: background-color 0.3s;
+    }
+
+    .front {
+      background: linear-gradient(to bottom, #f6f6f6 50%, #eee 50%);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background: linear-gradient(to top, #f6f6f6 50%, #eee 50%);
+    }
+
+    .show-image-btn {
+      margin-top: 10px;
+    }
+
+    .image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .card.flipped .image {
+      display: block;
+    }
+
+    /* On hover, increase the shadow and slightly scale up */
+    .card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
